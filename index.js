@@ -18,7 +18,6 @@ const { createMessagesTable, createProductsTable } = require('./db/utils/createT
 const app = express();
 const httpServer = new HttpServer(app);
 const io = new SocketServer(httpServer);
-const PORT = 8080 || process.env.PORT;
 const productsDB = new SQLClient(dbConfig.sqlite, 'products');
 const messagesDB = new SQLClient(dbConfig.sqlite, 'messages');
 
@@ -88,13 +87,23 @@ io.on('connection', async (socket) => {
 });
 
 // Routes
-
 app.use('/', routes);
 
+// ARGS (PORT)
+const minimist = require('minimist');
+const args = minimist(process.argv.slice(2), {
+  default: {
+    port: 8080,
+  },
+  alias: {
+    p: 'port',
+  },
+});
+
 // Listen
-httpServer.listen(PORT, () => {
+httpServer.listen(args.port, () => {
   MongoContainer.connect().then(() => {
     console.log('Connected to DB!');
-    console.log('Server running on port', PORT);
+    console.log('Server running on port', args.port);
   });
 });

@@ -25,7 +25,6 @@ form.addEventListener('submit', (e) => {
     price: inputPrice.value,
     thumbnail: inputThumbnail.value,
   };
-  console.log(newProduct);
 
   socket.emit('new-product', newProduct);
 });

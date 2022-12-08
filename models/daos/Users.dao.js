@@ -13,7 +13,6 @@ class UsersDao extends MongoDBContainer {
   async createUser(userItem) {
     try {
       const user = await this.save(userItem);
-      console.log('usuario guardado');
       return user;
     } catch (error) {
       if (

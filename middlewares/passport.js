@@ -26,7 +26,6 @@ passport.use(
           password: createHash(password),
         };
         const newUser = formatUserForDB(userItem);
-        console.log(`formatted user for db: ${newUser}`);
         const user = await User.createUser(newUser);
         console.log('User registration successful');
         return done(null, user);
@@ -60,13 +59,11 @@ passport.use(
 
 // Serialization
 passport.serializeUser((user, done) => {
-  console.log('Inside serializer');
   done(null, user._id);
 });
 
 // Deserialization
 passport.deserializeUser(async (id, done) => {
-  console.log('Inside deserializer');
   const user = await User.getById(id);
   done(null, user);
 });

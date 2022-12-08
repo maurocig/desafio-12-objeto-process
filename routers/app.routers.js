@@ -42,6 +42,20 @@ router.get('/logout', async (req, res) => {
   }
 });
 
+router.get('/info', async (req, res) => {
+  console.log();
+  const info = {
+    args: process.argv.slice(2).join(', '),
+    platform: process.platform,
+    version: process.version,
+    rss: process.memoryUsage().rss,
+    path: process.execPath,
+    pid: process.pid,
+    folder: process.cwd(),
+  };
+  res.render('info.hbs', { info });
+});
+
 router.get('/signin-error', async (req, res) => {
   res.render('login-error.hbs', {});
 });

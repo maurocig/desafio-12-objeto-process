@@ -10,7 +10,6 @@ module.exports = class Container {
     try {
       const records = await this.knex.from(this.tableName).select('*');
       // .select('id', 'title', 'price', 'thumbnail');
-      console.log('Items retrieved successfully.');
       return records;
     } catch (error) {
       console.log(error);
