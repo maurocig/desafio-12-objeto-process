@@ -43,7 +43,6 @@ router.get('/logout', async (req, res) => {
 });
 
 router.get('/info', async (req, res) => {
-  console.log();
   const info = {
     args: process.argv.slice(2).join(', '),
     platform: process.platform,
