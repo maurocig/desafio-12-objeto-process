@@ -1,24 +1,15 @@
 function createRandomNumbers(qty) {
-  const numbers = [];
+  const obj = {};
   for (let i = 0; i < qty; i++) {
-    const randomNumber = Math.floor(Math.random() * 1000 + 1);
-    numbers.push(randomNumber);
+    const randomNumber = Math.floor(Math.random() * 1001);
+    if (obj[randomNumber]) {
+      obj[randomNumber] = obj[randomNumber] + 1;
+    } else {
+      obj[randomNumber] = 1;
+    }
   }
-  return numbers;
+  return obj;
 }
-
-// function findDuplicates(array) {
-//   const duplicatesArray = [],
-//     index = 0;
-//   for (let i = 0; i < array.length; i++) {
-//     for (let j = i + 1; j < array.length; j++) {
-//       if (array[i] === array[j]) {
-//         newArray[index] = array[i];
-//         index += 1;
-//       }
-//     }
-//   }
-// }
 
 process.on('message', (msg) => {
   const result = createRandomNumbers(+msg);
