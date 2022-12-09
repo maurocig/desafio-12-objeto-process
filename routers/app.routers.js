@@ -1,15 +1,16 @@
 const express = require('express');
 const authRoutes = require('./auth.routes');
+const apiRoutes = require('./api.routes');
 const auth = require('../middlewares/auth');
 
 const router = express.Router();
 
 // Routes
 router.use('/auth', authRoutes);
+router.use('/api', apiRoutes);
 
 router.get('/', async (req, res) => {
   const user = req.user;
-  console.log(user);
   if (user) {
     res.render('home.hbs', { username: user.email });
   } else {
